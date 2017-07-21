@@ -130,6 +130,7 @@ func Main(sseChannel chan string) {
 		for {
 			select {
 			case msg := <-sseChannel:
+				log.Println("Pushing messages to clients")
 				js, _ := json.Marshal(encode.Encode(msg, time.Now()))
 				b.messages <- string(js)
 			default:
