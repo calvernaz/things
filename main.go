@@ -9,7 +9,6 @@ import (
 
 	"github.com/calvernaz/things/serial"
 	"github.com/calvernaz/things/sse"
-	"github.com/calvernaz/things/udp"
 )
 
 func main() {
@@ -28,10 +27,10 @@ func main() {
 	sseChannel := make(chan string)
 
 	waitGroup := &sync.WaitGroup{}
-	waitGroup.Add(2)
+	waitGroup.Add(1)
 
 	// go udp.ListenUdp(shutdownChannel, waitGroup)
-	go udp.SendUdp(shutdownUdpBroadcastCh, msgChannel, waitGroup)
+	//go udp.SendUdp(shutdownUdpBroadcastCh, msgChannel, waitGroup)
 	go serial.ReadSerial(shutdownSerialBroadcastCh, msgChannel, sseChannel, waitGroup)
 	go sse.Main(sseChannel)
 
@@ -42,6 +41,7 @@ func main() {
 
 	log.Println("Received quit. Sending shutdown and waiting on goroutines...")
 	shutdownUdpBroadcastCh <- true
+	shutdownSerialBroadcastCh <- true
 
 	/*
 	 * Block until wait group counter gets to zero
