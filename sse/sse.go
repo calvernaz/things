@@ -98,9 +98,8 @@ func (b *Broker) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			log.Println("HTTP connection just closed.")
 			return
 		case msg := <-messageChan:
-			fmt.Println("Message")
-			fmt.Fprint(w, "event: temp")
-			fmt.Fprintf(w, "data: %s\n\n", msg)
+			fmt.Fprint(w, "event: temp\n")
+			fmt.Fprintf(w, "data: %s\n", msg)
 			f.Flush()
 		}
 	}
