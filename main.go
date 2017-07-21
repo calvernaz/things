@@ -24,15 +24,15 @@ func main() {
 	shutdownUdpBroadcastCh := make(chan bool)
 	shutdownSerialBroadcastCh := make(chan bool)
 	msgChannel := make(chan string)
-	sseChannel := make(chan string)
+	msg2sseCh := make(chan string)
 
 	waitGroup := &sync.WaitGroup{}
 	waitGroup.Add(1)
 
 	// go udp.ListenUdp(shutdownChannel, waitGroup)
 	//go udp.SendUdp(shutdownUdpBroadcastCh, msgChannel, waitGroup)
-	go serial.ReadSerial(shutdownSerialBroadcastCh, msgChannel, sseChannel, waitGroup)
-	go sse.Main(sseChannel)
+	go serial.ReadSerial(shutdownSerialBroadcastCh, msgChannel, msg2sseCh, waitGroup)
+	go sse.Main(msg2sseCh)
 
 	/*
 	 * Wait until we get the quit message

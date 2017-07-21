@@ -12,7 +12,7 @@ import (
 	"go.bug.st/serial.v1"
 )
 
-func ReadSerial(shutdownSerialBroadcastCh chan bool, msg2UdpChannel chan string, msg2SseChannel chan string, waitGroup *sync.WaitGroup) {
+func ReadSerial(shutdownSerialBroadcastCh chan bool, msg2UdpChannel chan string, msg2SseCh chan string, waitGroup *sync.WaitGroup) {
 	log.Println("Starting work goroutine: ReadSerial")
 	defer waitGroup.Done()
 
@@ -52,7 +52,7 @@ func ReadSerial(shutdownSerialBroadcastCh chan bool, msg2UdpChannel chan string,
 					count += 1
 				} else {
 					fmt.Printf("RX: %v\n", lot[1:]+string(n))
-					return
+					break
 				}
 			}
 
@@ -66,10 +66,9 @@ func ReadSerial(shutdownSerialBroadcastCh chan bool, msg2UdpChannel chan string,
 					case <-shutdownSerialBroadcastCh:
 						log.Println("ReadSerial: Received shutdown on goroutine")
 						return
-					default:
-						msg := lot[1:]
-						msg2UdpChannel <- msg
-						msg2SseChannel <- msg
+					case msg := lot[1:]:
+						//msg2UdpChannel <- msg
+						msg2SseCh <- msg
 					}
 				}
 			}
