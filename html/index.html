@@ -28,15 +28,15 @@
     }, 1500)
 
 </script>
-<body style='margin : 0px; overflow: hidden; font-family: Monospace; '>
-	<div style='position: fixed; top: 10px; width:inherit; text-align: center; z-index: 1;'></div>
+<body style='margin : 0px; overflow: hidden;'>
 	<a-scene embedded artoolkit='sourceType: webcam;'>
-		<a-marker type='pattern' url='markers/hiro.patt' size='1'>
-			<a-entity>
-				<a-text value="No Value"></a-text>
-			</a-entity>
-		</a-marker>
-		<a-marker-camera preset="hiro"></a-marker-camera>
+		<!--<a-marker type='pattern' url='markers/hiro.patt' size='1'>
+		</a-marker> -->
+		<a-entity>
+			<a-text value="No Value"></a-text>
+		</a-entity>
+		<a-marker-camera preset="hiro">
+		</a-marker-camera>
 		<a-entity camera></a-entity>
 	</a-scene>
 </body>
