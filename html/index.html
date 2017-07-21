@@ -11,18 +11,20 @@
 	source.addEventListener('temp', (e) => {
 		let textEl = document.querySelector('a-text');
 		let d = JSON.parse(e.data);
-		switch (d) {
-			case /TEMP/.test(d.data[0]) === true:
-			    textEl.setAttribute('value', regex_temp.exec(d.data[0])[0]);
-			    break;
-			case /BATT/.test(d.data[0]) === true:
-                textEl.setAttribute('value', regex_batt.exec(d.data[0])[0]);
-                break;
+		if (d) {
+		    let evt = d.data[0];
+			if(/TEMP/.test(evt)) {
+                textEl.setAttribute('value', regex_temp.exec(evt)[0])
+            }
+
+			if (/BATT/.test(evt)) {
+                textEl.setAttribute('value', regex_batt.exec(evt)[0]);
+            }
         }
 	});
 
 	setInterval(function () {
-        if(document.querySelector("a-marker").object3D.visible == true) {
+        if(document.querySelector("a-marker-camera").object3D.visible == true) {
             console.log('I see you')
 		}
     }, 1500)
