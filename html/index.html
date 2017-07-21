@@ -5,7 +5,7 @@
 <script src="aframe-ar.js"></script>
 <script>
 	let regex = /[^TEMP0]+$/g;
-	let source = new EventSource('/events/');
+	let source = new EventSource('/events/', { withCredentials: true });
 	source.addEventListener('temp', (e) => {
 		let textEl = document.querySelector('a-text');
 		let d = JSON.parse(e.data);
