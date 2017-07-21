@@ -4,17 +4,21 @@
 <!-- include aframe-artoolkit -->
 <script src="aframe-ar.js"></script>
 <script>
-	let regex = /[^TEMP0]+$/g;
+	const regex_temp = /[^TEMP0]+$/g;
+	const regex_batt = /[^BATT0]+$/g;
+
 	let source = new EventSource('/events/', { withCredentials: true });
 	source.addEventListener('temp', (e) => {
 		let textEl = document.querySelector('a-text');
 		let d = JSON.parse(e.data);
-		console.log(d);
-		textEl.setAttribute('value', regex.exec(d.data[0])[0]);
+		switch (d) {
+			case /TEMP/.test(d.data[0]):
+			    textEl.setAttribute('value', regex_temp.exec(d.data[0])[0]);
+			case /BATT/.test(d.data[0]):
+                textEl.setAttribute('value', regex_batt.exec(d.data[0])[0]);
+        }
 	});
-    source.addEventListener('message', function(e) {
-        console.log(e.data);
-    }, false);
+
 </script>
 <body style='margin : 0px; overflow: hidden; font-family: Monospace; '>
 	<div style='position: fixed; top: 10px; width:inherit; text-align: center; z-index: 1;'></div>
