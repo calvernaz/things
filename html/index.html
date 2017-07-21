@@ -4,7 +4,7 @@
 <!-- include aframe-artoolkit -->
 <script src="aframe-ar.js"></script>
 <script>
-	const regex = /[^TEMP0]+$/g;
+	let regex = /[^TEMP0]+$/g;
 	let source = new EventSource('/events/');
 	source.addEventListener('temp', (e) => {
 		let textEl = document.querySelector('a-text');
