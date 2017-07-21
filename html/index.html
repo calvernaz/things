@@ -10,7 +10,7 @@
 		let textEl = document.querySelector('a-text');
 		let d = JSON.parse(e.data);
 		console.log(d);
-		textEl.setAttribute('value', regex.exec(d.data[0]));
+		textEl.setAttribute('value', regex.exec(d.data[0])[0]);
 	});
     source.addEventListener('message', function(e) {
         console.log(e.data);
