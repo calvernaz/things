@@ -99,7 +99,7 @@ func (b *Broker) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			return
 		case msg := <-messageChan:
 			fmt.Fprint(w, "event: temp\n")
-			fmt.Fprintf(w, "data: %s\n", msg)
+			fmt.Fprintf(w, "data: %s\n\n", msg)
 			f.Flush()
 		}
 	}
