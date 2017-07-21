@@ -14,10 +14,18 @@
 		switch (d) {
 			case /TEMP/.test(d.data[0]):
 			    textEl.setAttribute('value', regex_temp.exec(d.data[0])[0]);
+			    break;
 			case /BATT/.test(d.data[0]):
                 textEl.setAttribute('value', regex_batt.exec(d.data[0])[0]);
+                break;
         }
 	});
+
+	setInterval(function () {
+        if(document.querySelector("a-marker").object3D.visible == true) {
+            console.log('I see you')
+		}
+    }, 1500)
 
 </script>
 <body style='margin : 0px; overflow: hidden; font-family: Monospace; '>
