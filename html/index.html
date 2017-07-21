@@ -12,10 +12,10 @@
 		let textEl = document.querySelector('a-text');
 		let d = JSON.parse(e.data);
 		switch (d) {
-			case /TEMP/.test(d.data[0]):
+			case /TEMP/.test(d.data[0]) === true:
 			    textEl.setAttribute('value', regex_temp.exec(d.data[0])[0]);
 			    break;
-			case /BATT/.test(d.data[0]):
+			case /BATT/.test(d.data[0]) === true:
                 textEl.setAttribute('value', regex_batt.exec(d.data[0])[0]);
                 break;
         }
