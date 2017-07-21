@@ -139,8 +139,7 @@ func Main(sseChannel chan string) {
 
 	// When we get a request at "/", call `MainPageHandler`
 	// in a new goroutine.
-	http.Handle("/", http.StripPrefix("/", http.FileServer(http.Dir("./html"))))
-	//	http.Handle("/", http.FileServer(http.Dir("./html")))
+	http.Handle("/", http.FileServer(http.Dir("./html")))
 
 	// Start the server and listen forever on port 8000.
 	fmt.Println("Serving at :8000")
